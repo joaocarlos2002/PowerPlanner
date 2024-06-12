@@ -24,4 +24,3 @@ Esse projeto da faculdade consiste em desenvolver um programa em Python para mon
 
 - No final do mês, o relatório será gerado automaticamente.
 
-- Opcionalmente, utilize as funcionalidades de exportação para salvar o relatório em formato desejado
