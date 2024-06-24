@@ -4,12 +4,10 @@ Esse projeto da faculdade consiste em desenvolver um programa em Python para mon
 ## Funcionalidades Principais
 - O programa permite aos usuários inserir seu consumo diário de energia elétrica.
   
-- Ao final de cada mês, o programa calcula o consumo total de energia elétrica com base nos dados coletados.
-  
 - Geração de um relatório detalhado que inclui.
   - Consumo diário médio.
   - Consumo total do mês.
-  - Comparação com meses anteriores (se disponível).
+  - Comparação com meses anteriores.
   - Insights adicionais, como sugestões para redução do consumo de energia ou identificação de padrões de uso.
 
 ## Pré-requisitos
