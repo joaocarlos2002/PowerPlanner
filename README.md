@@ -1,5 +1,5 @@
 # PowerPlanner
-Esse projeto da faculdade consiste em desenvolver um programa em Python para monitorar e calcular o consumo diário de energia elétrica em watts e gerar um relatório mensal. 
+Esse meu primeiro projeto da faculdade consiste em desenvolver um programa em Python para monitorar e calcular o consumo diário de energia elétrica em watts e gerar um relatório mensal. 
 
 ## Funcionalidades Principais
 - O programa permite aos usuários inserir seu consumo diário de energia elétrica.
