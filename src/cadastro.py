@@ -1,9 +1,12 @@
 from calendar import monthrange
 from datetime import date
+from relatorio import criarRelatorioDiario
 import json
 import os
 
 
+METAPATH = os.path.join('dados', 'meta.json')
+CONSUMOPATH = os.path.join('dados', 'consumo.json')
 
 class Cadastro:
     def __init__(self):
@@ -11,9 +14,7 @@ class Cadastro:
         self.dia = self.data.day
         self.mes = self.data.month
         self.ano = self.data.year
-        
-         
-        
+
     def cadastrarMeta(self, tarifa: int, meta: int):
         meta_ = {
             'data': self.data.isoformat(),
@@ -27,14 +28,42 @@ class Cadastro:
         with open(os.path.join("dados", "meta.json"), "w") as metas:
             json.dump(meta_, metas,indent=1)
             
-    def cadastrarConsumo(self, consumo):
+    def cadastrarConsumo(self, consumo: int = 0):
         consumo_ = {
             'consumo': consumo,
             'dia': self.data.day
         }
 
-        CAMINHO = os.path.join("dados", "consumo.json")
-        
-        with open(CAMINHO, "w") as consumos:
-                json.dump(consumo_, consumos, indent=1)
+        try:
+            if not os.path.exists('dados'):
+                os.makedirs('dados')
+
+            if os.path.exists(CONSUMOPATH):
+                with open(CONSUMOPATH, "r") as consumos:
+                    listaConsumo = json.load(consumos)
+            else:
+                listaConsumo = []
+
+            updated = False
+
+            for item in listaConsumo:
+                if item['dia'] == self.data.day:
+                    item['consumo'] = consumo  
+                    updated = True
+                    break
+
+            if not updated:
+                listaConsumo.append(consumo_)
+
+            with open(CONSUMOPATH, "w") as consumos:
+                json.dump(listaConsumo, consumos, indent=1)
+
+        except:
+            print("Erro ao cadastrar consumo")
+
+
+
       
+teste = Cadastro()
+teste.cadastrarConsumo(100)
+# teste
