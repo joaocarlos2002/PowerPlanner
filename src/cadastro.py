@@ -11,9 +11,9 @@ CONSUMOPATH = os.path.join('dados', 'consumo.json')
 class Cadastro:
     def __init__(self):
         self.data = date.today()
-        self.dia = self.data.day
-        self.mes = self.data.month
-        self.ano = self.data.year
+        self.dia = date.day
+        self.mes = date.month
+        self.ano = date.year
 
     def cadastrarMeta(self, tarifa: int, meta: int):
         meta_ = {
@@ -29,37 +29,43 @@ class Cadastro:
             json.dump(meta_, metas,indent=1)
             
     def cadastrarConsumo(self, consumo: int = 0):
+        lista_de_consumidos = []
         consumo_ = {
-            'consumo': consumo,
-            'dia': self.data.day
-        }
-
-        try:
-            if not os.path.exists('dados'):
-                os.makedirs('dados')
-
-            if os.path.exists(CONSUMOPATH):
-                with open(CONSUMOPATH, "r") as consumos:
-                    listaConsumo = json.load(consumos)
-            else:
-                listaConsumo = []
-
-            updated = False
-
-            for item in listaConsumo:
-                if item['dia'] == self.data.day:
-                    item['consumo'] = consumo  
-                    updated = True
-                    break
-
-            if not updated:
-                listaConsumo.append(consumo_)
-
+                    'consumo': consumo,
+                    'dia': date.day
+                }
+        if not os.path.exists('dados'):
+            os.makedirs('dados')
+        
+        if os.path.exists(CONSUMOPATH):
             with open(CONSUMOPATH, "w") as consumos:
-                json.dump(listaConsumo, consumos, indent=1)
+                consumoAnterior = json.load(consumos[0][self.mes])
+                lista_de_consumidos.append(consumoAnterior)
+                
+                
+        else:
+            with open(CONSUMOPATH, "w") as consumos:
 
-        except:
-            print("Erro ao cadastrar consumo")
+
+                lista_do_mes = [{
+                    f'{self.mes}': [consumo_]
+                }]
+                
+                json.dump(lista_do_mes)
+            
+        
+        
+        
+        
+
+        
+                
+
+                
+
+                
+                
+
 
 
 
