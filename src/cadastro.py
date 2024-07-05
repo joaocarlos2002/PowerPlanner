@@ -1,19 +1,23 @@
 from calendar import monthrange
 from datetime import date
 from relatorio import criarRelatorioDiario
+from relatorio import criarRelatorioMensal
 import json
 import os
 
 
 METAPATH = os.path.join('dados', 'meta.json')
 CONSUMOPATH = os.path.join('dados', 'consumo.json')
+COSNUMOMENSALPATH = os.path.join('dados', 'consumo_mensal.json')
+
 
 class Cadastro:
     def __init__(self):
-        self.data = date.today()
+        self.data_atual = date.today()
         self.dia = date.day
         self.mes = date.month
         self.ano = date.year
+        
 
     def cadastrarMeta(self, tarifa: int, meta: int):
         meta_ = {
@@ -29,39 +33,37 @@ class Cadastro:
             json.dump(meta_, metas,indent=1)
             
     def cadastrarConsumo(self, consumo: int = 0):
-        lista_de_consumidos = []
-        consumo_ = {
-                    'consumo': consumo,
-                    'dia': date.day
-                }
-        if not os.path.exists('dados'):
-            os.makedirs('dados')
         
-        if os.path.exists(CONSUMOPATH):
-            with open(CONSUMOPATH, "w") as consumos:
-                consumoAnterior = json.load(consumos[0][self.mes])
-                lista_de_consumidos.append(consumoAnterior)
-                
-                
+        consumoMensal += consumo
+        
+        
+        consumo_ = {
+            "consumo": consumo,
+            "dia": self.dia 
+        }
+        
+        with open(CONSUMOPATH, "w") as consumos:
+            json.dump(consumo_, consumos)
+            
+            
+        
+        if self.dia != monthrange(self.ano,self.mes )[1]:
+            criarRelatorioDiario()
+            
         else:
-            with open(CONSUMOPATH, "w") as consumos:
-
-
-                lista_do_mes = [{
-                    f'{self.mes}': [consumo_]
-                }]
-                
-                json.dump(lista_do_mes)
+            criarRelatorioMensal(consumoMensal, self.mes.strftime("%B"))
+        
             
         
         
         
         
 
-        
-                
 
+# data_atual = date.today()     
                 
+# ultimo_dia_do_mes = monthrange(data_atual.year, data_atual.month)[1]
+# print(ultimo_dia)
 
                 
                 
