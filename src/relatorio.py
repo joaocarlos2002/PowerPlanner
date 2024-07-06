@@ -37,6 +37,8 @@ def criarRelatorioDiario():
     draw.text((675,600), f'{meta} KW', font=ImageFont.truetype(FONTE, 40), fill=(255, 74, 59))
     draw.text((675,730), f'{meta} KW', font=ImageFont.truetype(FONTE, 40), fill=(255, 74, 59))
     
+
+    
     # draw.text((1100,870), f'R$: {custo_por_dia_previsto:.2f}', font=ImageFont.truetype(FONTE, 30), fill=(0,0,0))
     # draw.text((1140,1000), f'{consumo_por_dia_previsto:.2f}', font=ImageFont.truetype(FONTE, 25), fill=(0,0,0))
         
