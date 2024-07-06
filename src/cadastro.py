@@ -29,49 +29,29 @@ class Cadastro:
             'tarifa': tarifa
         }
         
-        with open(os.path.join("dados", "meta.json"), "w") as metas:
+        with open(METAPATH, "w") as metas:
             json.dump(meta_, metas,indent=1)
             
     def cadastrarConsumo(self, consumo: int = 0):
         
-        consumoMensal += consumo
-        
-        
+        consumoMensal = consumo 
+
         consumo_ = {
-            "consumo": consumo,
-            "dia": self.dia 
+            'consumo': consumo,
+            'data': str(self.dia),
         }
         
-        with open(CONSUMOPATH, "w") as consumos:
-            json.dump(consumo_, consumos)
+        with open(CONSUMOPATH, "w") as consumos:  
+            json.dump(consumo_, consumos, indent=4)
             
-            
+        # criarRelatorioDiario()            
         
-        if self.dia != monthrange(self.ano,self.mes )[1]:
-            criarRelatorioDiario()
-            
-        else:
-            criarRelatorioMensal(consumoMensal, self.mes.strftime("%B"))
-        
-            
-        
-        
-        
-        
+        # if self.dia != monthrange(self.ano,self.mes )[1]:
+        #     criarRelatorioDiario()
+        # else:
+        #     criarRelatorioMensal(consumoMensal, self.mes.strftime("%B"))
 
-
-# data_atual = date.today()     
-                
-# ultimo_dia_do_mes = monthrange(data_atual.year, data_atual.month)[1]
-# print(ultimo_dia)
-
-                
-                
-
-
-
-
-      
 teste = Cadastro()
-teste.cadastrarConsumo(100)
+teste.cadastrarConsumo(1212312313120)
+
 # teste

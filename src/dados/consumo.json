@@ -1,1 +1,4 @@
-100
+{
+    "consumo": 1212312313120,
+    "data": "<attribute 'day' of 'datetime.date' objects>"
+}
