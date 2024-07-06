@@ -24,3 +24,7 @@ Esse meu primeiro projeto da faculdade consiste em desenvolver um programa em Py
 
 - No final do mês, o relatório será gerado automaticamente.
 
+# ATENÇÃO
+
+Algumas elementos deste repositório não estão da maneira mais correta possível, isso se deve a limitações impostas pela cadeira. 
+
