@@ -8,8 +8,6 @@ import os
 
 METAPATH = os.path.join('dados', 'meta.json')
 CONSUMOPATH = os.path.join('dados', 'consumo.json')
-COSNUMOMENSALPATH = os.path.join('dados', 'consumo_mensal.json')
-
 
 
 class Cadastro:
