@@ -14,6 +14,7 @@ CONSUMOPATH = os.path.join('dados', 'consumo.json')
 FONTE = os.path.join('fontes', 'RubikOne-Regular.ttf')
 IMAGEM = os.path.join('templates', 'relatorio.png')
 IMAGEMMENSAL = os.path.join('templates', 'relatorio_mensal.png')
+CAMINHORESULTS = os.path.join('results')
 
 
 def criarRelatorioDiario():
@@ -40,7 +41,9 @@ def criarRelatorioDiario():
     draw.text((1050,1015), f'{consumoPorDiaPrevisto:.2f} KW', font=ImageFont.truetype(FONTE, 40), fill=(255, 74, 59))
     draw.text((675,1200), f'R$: {CustoDiario:.2f}', font=ImageFont.truetype(FONTE, 40), fill=(255, 74, 59))
 
-    relatorio.save(f"Relatorio-{metas_['data']}.png", 'PNG')
+
+    caminhoParaSalvar =  os.path.join(CAMINHORESULTS, f"Relatorio-{metas_['data']}.png")
+    relatorio.save(caminhoParaSalvar, 'PNG')
 
 def criarRelatorioMensal(consumido : float = 0, mes = 'teste' ):
     
@@ -56,7 +59,9 @@ def criarRelatorioMensal(consumido : float = 0, mes = 'teste' ):
     draw.text((675,470), f'{meta} KW', font=ImageFont.truetype(FONTE, 40), fill=(255, 74, 59))
     draw.text((675,600), f'{consumido} KW', font=ImageFont.truetype(FONTE, 40), fill=(255, 74, 59))
     draw.text((675,1250), f'R$: {custoTotal:.2f}', font=ImageFont.truetype(FONTE, 40), fill=(255, 74, 59))    
-    
-    relatorio.save(f"Relatorio-{mes}.png", 'PNG')
+
+
+    caminhoParaSalvar =  os.path.join(CAMINHORESULTS, f"Relatorio-{mes}.png")
+    relatorio.save(caminhoParaSalvar, 'PNG')
     
 
