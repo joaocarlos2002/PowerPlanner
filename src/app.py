@@ -1,47 +1,32 @@
-from configs.cadastro import Cadastro
-import os
-import json
-from calendar import monthrange
+from cadastro import cadastrarConsumo
+from cadastro import cadastrarMeta
+from gerarResultados import *
+from imprimir import *
+from relatorio import *
 from datetime import date
-import random
 
 
-METAPATH = os.path.join('dados', 'meta.json')
-CONSUMOPATH = os.path.join('dados', 'consumo.json')
 
-
-def gerarTarifaAleatoria() -> float:
-    return random.uniform(0.1, 3)
-
-def gerarMetaAleatoria() -> float:
-    return random.uniform(199, 10000)
-
-def gerarConsumoAleatorio() -> float:
-    return random.uniform(0, 100)
+META_PATH = os.path.join('dados', 'meta.json')
 
 
 def app():
-
-    cadastro = Cadastro()
+    print(imprimirTextoInicial())
+    
+    
     data = date.today()
 
-    with open(CONSUMOPATH, 'r') as consumo:
-        consumo_ = json.load(consumo)
-
-    with open(METAPATH , 'r') as metas:
+    with open(META_PATH, 'r') as metas:
         metas_ = json.load(metas)
 
+    if data.day == metas_['ultimo_dia_do_mes']:
+        cadastrarConsumo(gerarConsumo()) 
+        cadastrarMeta(gerarTarifa(), gerarMeta()) 
+        imprimirTextoDeCadastroDeMeta()
+        
+    else: 
+        cadastrarConsumo(gerarConsumo()) 
+        imprimirTextoDeCadastroDeConsumo()
 
-    if consumo_['data'] == data.day:
-         pass
-    else:
-        cadastro.cadastrarConsumo(gerarConsumoAleatorio)
-
-    if metas_['ultimo_dia_do_mes'] == data.day:
-        cadastro.cadastrarMeta(gerarTarifaAleatoria, gerarMetaAleatoria)
-    else:
-        pass
-
-
-if __name__ == "__main__":
+if __name__ == '__main__':
     app()
