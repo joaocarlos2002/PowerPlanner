@@ -18,7 +18,7 @@ class Cadastro:
         self.ano = self.data_atual.year
         self.consumoTotal = 0
 
-    def cadastrarMeta(self, tarifa: int = 1, meta: int = 0) -> None:
+    def cadastrarMeta(self, tarifa: float = 1, meta: float = 0) -> None:
         meta_ = {
             'data': self.data_atual.isoformat(),
             'mes_da_meta': self.mes,
@@ -31,7 +31,7 @@ class Cadastro:
         with open(METAPATH, "w") as metas:
             json.dump(meta_, metas, indent=1)
             
-    def cadastrarConsumo(self, consumo: int = 0): 
+    def cadastrarConsumo(self, consumo: float = 0): 
 
         data = date.today()
         dia = data.day
