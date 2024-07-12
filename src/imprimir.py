@@ -44,3 +44,5 @@ def  imprimirTextoDeCadastroDeMeta():
 
 
 '''
+
+    return texto
