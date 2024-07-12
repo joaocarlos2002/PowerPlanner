@@ -10,7 +10,7 @@ Esse meu primeiro projeto da faculdade consiste em desenvolver um programa em Py
   - Consumo diário médio.
   - Consumo total do mês.
   - Comparação com meses anteriores (se disponível).
-  - Insights adicionais, como sugestões para redução do consumo de energia ou identificação de padrões de uso.
+  
 
 ## Pré-requisitos
 - Python 3.12.4
