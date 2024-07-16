@@ -45,19 +45,19 @@ def gerarRelatorioDiario(consumo):
         if not isinstance(metas_, dict):
             raise ValueError(f'O valor de meta_ deve ser um dict')
 
-        custoPorDiaPrevisto = (metas_['meta'] /30) * metas_['tarifa']
+        custoPorDiaPrevisto = (metas_['meta'] / 30) * metas_['tarifa']
 
         if not isinstance(custoPorDiaPrevisto, float):
             raise ValueError(f'O valor de custoPorDiaPrevisto deve ser um float')
 
-        consumoPorDiaPrevisto = (metas_['meta'] /30)
+        consumoPorDiaPrevisto = (metas_['meta'] / 30)
 
         if not isinstance(consumoPorDiaPrevisto, float):
                     raise ValueError(f'O valor de consumoPorDiaPrevisto deve ser um float')
 
-        meta = str(metas_['meta'])
+        meta = (metas_['meta'])
 
-        if not isinstance(meta, str):
+        if not isinstance(meta, float):
             raise ValueError(f'O valor de meta deve ser um str')
 
         CustoDiario = consumo * metas_['tarifa']
@@ -67,7 +67,7 @@ def gerarRelatorioDiario(consumo):
 
         try:
             draw.text((675,470), metas_['data'], font=ImageFont.truetype(FONTE, 40), fill=(255, 74, 59))
-            draw.text((675,600), f'{meta} KW', font=ImageFont.truetype(FONTE, 40), fill=(255, 74, 59))
+            draw.text((675,600), f'{meta:.2f} KW', font=ImageFont.truetype(FONTE, 40), fill=(255, 74, 59))
             draw.text((675,730), f'{consumo:.2f} KW', font=ImageFont.truetype(FONTE, 40), fill=(255, 74, 59))
             draw.text((180,1015), f'R$: {custoPorDiaPrevisto:.2f}', font=ImageFont.truetype(FONTE, 40), fill=(255, 74, 59))
             draw.text((1050,1015), f'{consumoPorDiaPrevisto:.2f} KW', font=ImageFont.truetype(FONTE, 40), fill=(255, 74, 59))

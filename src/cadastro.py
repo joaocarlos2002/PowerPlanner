@@ -24,7 +24,6 @@ def cadastrarConsumoMensal(consumoDiario):
         json.JSONDecodeError: Esse erro ocorre quando o Python tenta decodificar um arquivo JSON, mas não consegue porque o conteúdo do arquivo não está em um formato JSON válido.
         IOError: Esse erro ocorre quando há um problema ao tentar abrir ou ler um arquivo, como se o arquivo não existir ou não puder ser acessado por algum motivo.
 
-    
     '''
 
     if not isinstance(consumoDiario, (float)):

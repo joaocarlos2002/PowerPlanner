@@ -22,11 +22,9 @@ def app():
     if data.day == metas_['ultimo_dia_do_mes']:
         cadastrarConsumo(gerarConsumo()) 
         cadastrarMeta(gerarTarifa(), gerarMeta()) 
-        imprimirTextoDeCadastroDeMeta()
         
     else: 
         cadastrarConsumo(gerarConsumo()) 
-        imprimirTextoDeCadastroDeConsumo()
-
+        
 if __name__ == '__main__':
     app()
