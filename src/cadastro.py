@@ -21,8 +21,9 @@ def cadastrarConsumoMensal(consumoDiario):
 
         Levanta
         FileNotFoundError: esse erro ocorre quando ele não encontra o MENSAL_PATH
-        json.JSONDecodeError: no caso dessa função esse erro ocorre quando não se consegue decodificar o arquivo json
-        IOError: ocorrer quando existe um erro ao ler o arquivo
+        json.JSONDecodeError: Esse erro ocorre quando o Python tenta decodificar um arquivo JSON, mas não consegue porque o conteúdo do arquivo não está em um formato JSON válido.
+        IOError: Esse erro ocorre quando há um problema ao tentar abrir ou ler um arquivo, como se o arquivo não existir ou não puder ser acessado por algum motivo.
+
     
     '''
 
