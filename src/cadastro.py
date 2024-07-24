@@ -151,13 +151,42 @@ def cadastrarMeta(tarifa, meta, data = date.today()):
         raise
 
 
-def comparar_meses():
-    ...
+def comparar_mes_com_a_meta(meta, consumido):
+    '''
+    FALTA ARRUMAR O CODIGO E DOCUMENTAR
+    '''
+    porce = (consumido * 100) / meta
+    return str(porce)
+
+def comparar_meses(porcentagens_dos_meses_com_a_meta = [], total_economizado= 0, mes_que_mais_economizou= 0):
+
+    '''
+    FALTA ARRUMAR O CODIGO E DOCUMENTAR
+    '''
+    with open(MESES_PATH, 'r') as arq:
+        lista_com_resultado_de_todos_os_meses = json.load(arq)
+    
+    for i, j, k in lista_com_resultado_de_todos_os_meses:
+
+
+
+        porcentagens_dos_meses_com_a_meta.append
+        
+
+
+
 
 
 def salvar_dados_para_comparar_os_meses(mes = date.today().month, lista_com_resultado_de_todos_os_meses = []):
     
-    lista_de_consumo_deste_mes = [mes]
+    '''
+        FALTA ARRUMAR O CODIGO E DOCUMENTAR
+    '''
+    with open(META_PATH, 'r') as arq:
+        meta_ = json.load(arq)
+
+    
+    lista_de_consumo_deste_mes = [mes, meta_["meta"]]
 
     with open(MENSAL_PATH, 'r') as arq:
         consumido_neste_mes = json.load(arq)
@@ -173,9 +202,8 @@ def salvar_dados_para_comparar_os_meses(mes = date.today().month, lista_com_resu
     except:
         print('teste123')
 
-    print(lista_com_resultado_de_todos_os_meses)
     with open(MESES_PATH, 'w') as meses:
-        json.dump(lista_com_resultado_de_todos_os_meses, meses, indent=1)
+        json.dump(lista_com_resultado_de_todos_os_meses, meses)
 
 
 def cadastrarConsumo(consumo, data = date.today()):
@@ -185,7 +213,6 @@ def cadastrarConsumo(consumo, data = date.today()):
 
         Parâmetros:
         consumo: é o consumo informado pelo usuario 
-    
     
     '''
 
