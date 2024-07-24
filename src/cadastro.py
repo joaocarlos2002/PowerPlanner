@@ -158,20 +158,45 @@ def comparar_mes_com_a_meta(meta, consumido):
     porce = (consumido * 100) / meta
     return str(porce)
 
-def comparar_meses(porcentagens_dos_meses_com_a_meta = [], total_economizado= 0, mes_que_mais_economizou= 0):
+def verificar_total_economizado(meta, consumido):
+    economizado = meta - consumido
+    if economizado <= 0:
+        return "Voce nao obteve exito em economizar"
+    return economizado
+
+# def verificar_mes_que_mais_economizou(lista):
+#     for elemento in range(len(lista)-1,0,-1):
+#         for i in range(elemento):
+#             if lista[i]>lista[i+1]:
+#                 temp = lista[i]
+#                 lista[i] = lista[i+1]
+#                 lista[i+1] = temp
+#     return lista
+
+
+def salva_comparacao_de_meses(porcentagens_dos_meses_com_a_meta = [], total_economizado_em_cada_mes = [], mes_que_mais_economizou = []):
 
     '''
     FALTA ARRUMAR O CODIGO E DOCUMENTAR
     '''
+
     with open(MESES_PATH, 'r') as arq:
         lista_com_resultado_de_todos_os_meses = json.load(arq)
     
     for i, j, k in lista_com_resultado_de_todos_os_meses:
-
-
-
-        porcentagens_dos_meses_com_a_meta.append
+        lista_de_porcentagens = [i, comparar_mes_com_a_meta(j,k)]
+        lista_do_total_economizado = [i, verificar_total_economizado(j,k)]
+        # lista_do_mes_que_mais_economizou = [i, verificar_mes_que_mais_economizou()]
         
+        porcentagens_dos_meses_com_a_meta.append(lista_de_porcentagens)
+        total_economizado_em_cada_mes.append(lista_do_total_economizado)
+    
+    
+
+
+
+        
+    
 
 
 
@@ -232,4 +257,4 @@ def cadastrarConsumo(consumo, data = date.today()):
         raise
 
 
-salvar_dados_para_comparar_os_meses()
+# salvar_dados_para_comparar_os_meses()
