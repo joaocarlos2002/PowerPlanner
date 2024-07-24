@@ -10,6 +10,8 @@ from datetime import date
 META_PATH = os.path.join('dados', 'meta.json')
 
 
+
+
 def app():
     print(imprimirTextoInicial())
     

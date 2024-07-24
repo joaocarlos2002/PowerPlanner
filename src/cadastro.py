@@ -9,7 +9,7 @@ import json
 
 META_PATH = os.path.join('dados', 'meta.json')
 MENSAL_PATH = os.path.join('dados', 'mensal.json')
-
+MESES_PATH = os.path.join('dados', "meses.txt")
 
 def cadastrarConsumoMensal(consumoDiario):
 
@@ -150,6 +150,34 @@ def cadastrarMeta(tarifa, meta, data = date.today()):
         print(f'Um erro aconteceu no {e}')
         raise
 
+
+def comparar_meses():
+    ...
+
+
+def salvar_dados_para_comparar_os_meses(mes = date.today().month, lista_com_resultado_de_todos_os_meses = []):
+    
+    lista_de_consumo_deste_mes = [mes]
+
+    with open(MENSAL_PATH, 'r') as arq:
+        consumido_neste_mes = json.load(arq)
+
+    lista_de_consumo_deste_mes.append(consumido_neste_mes)
+
+    try: 
+        with open(MESES_PATH, 'r') as arq:
+            lista_com_resultado_de_todos_os_meses = json.load(arq)
+        
+        lista_com_resultado_de_todos_os_meses.append(lista_de_consumo_deste_mes)
+
+    except:
+        print('teste123')
+
+    print(lista_com_resultado_de_todos_os_meses)
+    with open(MESES_PATH, 'w') as meses:
+        json.dump(lista_com_resultado_de_todos_os_meses, meses, indent=1)
+
+
 def cadastrarConsumo(consumo, data = date.today()):
 
     '''
@@ -168,12 +196,13 @@ def cadastrarConsumo(consumo, data = date.today()):
         cadastrarConsumoMensal(consumo)
 
         if data.day != monthrange(data.year, data.month)[1]:
-            gerarRelatorioDiario(consumo)
-        else:
-            gerarRelatorioMensal(enviarDadosMensais())
+            return gerarRelatorioDiario(consumo)
+
+        return gerarRelatorioMensal(enviarDadosMensais())
     
     except Exception as e:
         print(f'Um erro aconteceu no {e}')
         raise
 
 
+salvar_dados_para_comparar_os_meses()
