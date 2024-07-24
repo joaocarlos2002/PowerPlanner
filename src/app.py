@@ -1,5 +1,5 @@
-from cadastro import cadastrar_consumo 
-from cadastro import cadastrar_meta
+from cadastro import cadastrar_consumo, cadastrar_meta
+
 from gerarResultados import *
 from imprimir import *
 from relatorio import *
@@ -28,6 +28,9 @@ def app():
         
     else: 
         cadastrar_consumo (gerarConsumo()) 
-        
+    
+    # try:
+
+
 if __name__ == '__main__':
     app()

@@ -2,19 +2,23 @@ from PIL import Image
 from PIL import ImageDraw
 from PIL import ImageFont
 from datetime import date
+import calendar
 import os
 import json
-
+import locale
 
 META_PATH = os.path.join('dados', 'meta.json')
 CAMINHO_RESULTS = os.path.join('results')
+MESES_COMPARADOS_PATH = os.path.join('dados', "meses_comparados.json")
+
 
 FONTE = os.path.join('fontes', 'RubikOne-Regular.ttf')
 IMAGEM = os.path.join('templates', 'relatorio.png')
 IMAGEM_MENSAL = os.path.join('templates', 'relatorio_mensal.png')
+MESES_COMPARADOS = os.path.join('templates', 'comparados.png')
+locale.setlocale(locale.LC_TIME, 'pt_BR.UTF-8')
 
-
-def gerarRelatorioDiario(consumo):
+def gerar_relatorio_diario(consumo):
     '''
 
     
@@ -96,7 +100,7 @@ def gerarRelatorioDiario(consumo):
         print(f' Um erro aconteceu {e}')
         raise
 
-def gerarRelatorioMensal(consumido: float = 0, mes = date.today().month):
+def gerar_relatorio_mensal(consumido: float = 0, mes = date.today().month):
     '''
     
     '''
@@ -113,7 +117,6 @@ def gerarRelatorioMensal(consumido: float = 0, mes = date.today().month):
         
         if not isinstance(metas_, dict):
                 raise ValueError(f'O valor de meta_ deve ser um dict')
-
 
         meta = str(metas_['meta'])
 
@@ -153,6 +156,49 @@ def gerarRelatorioMensal(consumido: float = 0, mes = date.today().month):
         print(f' Um erro aconteceu {e}')
         raise
 
+def gerar_relatorio_de_meses_comparados():
+    '''
+    FALTA ARRUMAR O CODIGO E DOCUMENTAR
+
+    '''
 
 
+    relatorio = Image.open(MESES_COMPARADOS)
+    draw = ImageDraw.Draw(relatorio)
+
+    with open(MESES_COMPARADOS_PATH, "r") as arq:
+        meses = json.load(arq)
+
+    for i in meses["porcentagens_dos_meses_com_a_meta"]:
+        if meses["mes_que_mais_economizou"] in i:
+            mes = i[0]
+
+    total_economizado = 0
+    for i in meses["total_economizado_em_cada_mes"]:
+        total_economizado += i[1]
+
+    if total_economizado <=0:
+        texto = 'Você não conseguiu economizar '
+        pontos = 'seus pontos foram zerados'
+    else:
+        texto = f'Você economizou {total_economizado:.2f} KW'
+        pontos = total_economizado * 1000 + 1000
     
+
+    try:
+
+        draw.text((600,370), f'{calendar.month_name[mes]} você economizou {meses["mes_que_mais_economizou"]:.2f} %', font=ImageFont.truetype(FONTE, 40), fill=(255, 74, 59))
+        draw.text((600,500), f'{len(meses["porcentagens_dos_meses_com_a_meta"])} meses cadastrados', font=ImageFont.truetype(FONTE, 40), fill=(255, 74, 59))
+        draw.text((600,630), texto, font=ImageFont.truetype(FONTE, 40), fill=(255, 74, 59))
+        draw.text((650,780), pontos, font=ImageFont.truetype(FONTE, 40), fill=(255, 74, 59))
+         
+         
+    except:
+         ...
+
+
+
+    caminhoParaSalvar =  os.path.join(CAMINHO_RESULTS, f"comparação.png")
+    relatorio.save(caminhoParaSalvar, 'PNG')
+
+gerar_relatorio_de_meses_comparados()

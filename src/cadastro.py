@@ -1,5 +1,5 @@
-from relatorio import gerarRelatorioDiario
-from relatorio import gerarRelatorioMensal
+
+from relatorio import gerar_relatorio_mensal, gerar_relatorio_diario
 from calendar import monthrange
 from datetime import date
 from gerarResultados import *
@@ -10,7 +10,7 @@ import json
 META_PATH = os.path.join('dados', 'meta.json')
 MENSAL_PATH = os.path.join('dados', 'mensal.json')
 MESES_PATH = os.path.join('dados', "meses.txt")
-MESES_COMPARADOS_PATH = os.path.join('dados', "meses_comparados.txt")
+MESES_COMPARADOS_PATH = os.path.join('dados', "meses_comparados.json")
 
 
 # arrumar o nome das funcoes [x]
@@ -171,8 +171,7 @@ def verificar_total_economizado(meta, consumido):
 
     '''
     economizado = meta - consumido
-    if economizado <= 0:
-        return "Voce nao obteve exito em economizar"
+    
     return economizado
 
 def verificar_mes_que_mais_economizou(lista):
@@ -193,7 +192,7 @@ def verificar_mes_que_mais_economizou(lista):
 def salva_comparacao_de_meses(porcentagens_dos_meses_com_a_meta = [], total_economizado_em_cada_mes = [], mes_que_mais_economizou = []):
 
     '''
-    FALTA ARRUMAR O CODIGO E DOCUMENTAR
+    FALTA ARRUMAR O CODIGO E DOCUMENTAR - MUITO MAL ARRUMADO - PRIORIDADE
     '''
 
     with open(MESES_PATH, 'r') as arq:
@@ -218,7 +217,7 @@ def salva_comparacao_de_meses(porcentagens_dos_meses_com_a_meta = [], total_econ
     }
 
     with open (MESES_COMPARADOS_PATH, "w") as arq:
-        json.dump(dict_mes,arq)
+        json.dump(dict_mes,arq, indent=1)
         
 
 
@@ -268,14 +267,15 @@ def cadastrar_consumo (consumo, data = date.today()):
         cadastrar_consumo_mensal(consumo)
 
         if data.day != monthrange(data.year, data.month)[1]:
-            return gerarRelatorioDiario(consumo)
+            return gerar_relatorio_diario(consumo)
 
-        return gerarRelatorioMensal(enviar_dados_mensais())
+        return gerar_relatorio_mensal(enviar_dados_mensais())
     
     except Exception as e:
         print(f'Um erro aconteceu no {e}')
         raise
 
+def comparar_mes():
+    ...
 
-# salvar_dados_para_comparar_os_meses()
-salva_comparacao_de_meses()
+# salva_comparacao_de_meses()
