@@ -1,5 +1,5 @@
-from cadastro import cadastrarConsumo
-from cadastro import cadastrarMeta
+from cadastro import cadastrar_consumo 
+from cadastro import cadastrar_meta
 from gerarResultados import *
 from imprimir import *
 from relatorio import *
@@ -23,11 +23,11 @@ def app():
         metas_ = json.load(metas)
 
     if data.day == metas_['ultimo_dia_do_mes']:
-        cadastrarConsumo(gerarConsumo()) 
-        cadastrarMeta(gerarTarifa(), gerarMeta()) 
+        cadastrar_consumo (gerarConsumo()) 
+        cadastrar_meta(gerarTarifa(), gerarMeta()) 
         
     else: 
-        cadastrarConsumo(gerarConsumo()) 
+        cadastrar_consumo (gerarConsumo()) 
         
 if __name__ == '__main__':
     app()

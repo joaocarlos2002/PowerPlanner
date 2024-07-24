@@ -10,8 +10,15 @@ import json
 META_PATH = os.path.join('dados', 'meta.json')
 MENSAL_PATH = os.path.join('dados', 'mensal.json')
 MESES_PATH = os.path.join('dados', "meses.txt")
+MESES_COMPARADOS_PATH = os.path.join('dados', "meses_comparados.txt")
 
-def cadastrarConsumoMensal(consumoDiario):
+
+# arrumar o nome das funcoes [x]
+# terminar de documentar []
+# arrumar o codigo de todas as funcoes para ficar legivel []
+
+
+def cadastrar_consumo_mensal(consumoDiario):
 
     '''
         Cadastra o consumo mensal 
@@ -62,7 +69,7 @@ def cadastrarConsumoMensal(consumoDiario):
         raise
 
 
-def enviarDadosMensais():
+def enviar_dados_mensais():
 
     '''
         serve para retornar o valor do consumo mensal para a função 'cadastrarConsumo'
@@ -101,7 +108,7 @@ def enviarDadosMensais():
         print(f' Um erro aconteceu no {e}')
 
 
-def cadastrarMeta(tarifa, meta, data = date.today()):
+def cadastrar_meta(tarifa, meta, data = date.today()):
 
     '''
         serve para cadastrar a meta estabelecida no json respectivo 
@@ -156,22 +163,31 @@ def comparar_mes_com_a_meta(meta, consumido):
     FALTA ARRUMAR O CODIGO E DOCUMENTAR
     '''
     porce = (consumido * 100) / meta
-    return str(porce)
+    return (porce)
 
 def verificar_total_economizado(meta, consumido):
+    '''
+    FALTA ARRUMAR O CODIGO E DOCUMENTAR
+
+    '''
     economizado = meta - consumido
     if economizado <= 0:
         return "Voce nao obteve exito em economizar"
     return economizado
 
-# def verificar_mes_que_mais_economizou(lista):
-#     for elemento in range(len(lista)-1,0,-1):
-#         for i in range(elemento):
-#             if lista[i]>lista[i+1]:
-#                 temp = lista[i]
-#                 lista[i] = lista[i+1]
-#                 lista[i+1] = temp
-#     return lista
+def verificar_mes_que_mais_economizou(lista):
+    '''
+    FALTA ARRUMAR O CODIGO E DOCUMENTAR
+
+    '''
+
+    lista_maior = []
+
+    for i in lista:
+        lista_maior.append(i[1])
+
+    numeros_ordenados = sorted(lista_maior)
+    return numeros_ordenados[0]
 
 
 def salva_comparacao_de_meses(porcentagens_dos_meses_com_a_meta = [], total_economizado_em_cada_mes = [], mes_que_mais_economizou = []):
@@ -182,24 +198,28 @@ def salva_comparacao_de_meses(porcentagens_dos_meses_com_a_meta = [], total_econ
 
     with open(MESES_PATH, 'r') as arq:
         lista_com_resultado_de_todos_os_meses = json.load(arq)
-    
+
+    lista_de_porcentagens = []
+
     for i, j, k in lista_com_resultado_de_todos_os_meses:
-        lista_de_porcentagens = [i, comparar_mes_com_a_meta(j,k)]
+        lista_de_porcentagens.append([i, comparar_mes_com_a_meta(j,k)])
         lista_do_total_economizado = [i, verificar_total_economizado(j,k)]
-        # lista_do_mes_que_mais_economizou = [i, verificar_mes_que_mais_economizou()]
         
         porcentagens_dos_meses_com_a_meta.append(lista_de_porcentagens)
         total_economizado_em_cada_mes.append(lista_do_total_economizado)
-    
-    
 
+    mes_que_mais_economizou = verificar_mes_que_mais_economizou(lista_de_porcentagens)
 
+    dict_mes = {
+        "porcentagens_dos_meses_com_a_meta": porcentagens_dos_meses_com_a_meta,
+        "total_economizado_em_cada_mes": total_economizado_em_cada_mes,
+        "mes_que_mais_economizou": mes_que_mais_economizou
 
+    }
+
+    with open (MESES_COMPARADOS_PATH, "w") as arq:
+        json.dump(dict_mes,arq)
         
-    
-
-
-
 
 
 def salvar_dados_para_comparar_os_meses(mes = date.today().month, lista_com_resultado_de_todos_os_meses = []):
@@ -231,7 +251,7 @@ def salvar_dados_para_comparar_os_meses(mes = date.today().month, lista_com_resu
         json.dump(lista_com_resultado_de_todos_os_meses, meses)
 
 
-def cadastrarConsumo(consumo, data = date.today()):
+def cadastrar_consumo (consumo, data = date.today()):
 
     '''
         Serve para gerar o relatorio diario ou mensal
@@ -245,12 +265,12 @@ def cadastrarConsumo(consumo, data = date.today()):
         if not isinstance(consumo, float):
             raise ValueError(f'O consumo deve ser um float')
         
-        cadastrarConsumoMensal(consumo)
+        cadastrar_consumo_mensal(consumo)
 
         if data.day != monthrange(data.year, data.month)[1]:
             return gerarRelatorioDiario(consumo)
 
-        return gerarRelatorioMensal(enviarDadosMensais())
+        return gerarRelatorioMensal(enviar_dados_mensais())
     
     except Exception as e:
         print(f'Um erro aconteceu no {e}')
@@ -258,3 +278,4 @@ def cadastrarConsumo(consumo, data = date.today()):
 
 
 # salvar_dados_para_comparar_os_meses()
+salva_comparacao_de_meses()
