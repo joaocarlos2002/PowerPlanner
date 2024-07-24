@@ -200,14 +200,14 @@ def salva_comparacao_de_meses(porcentagens_dos_meses_com_a_meta = [], total_econ
         lista_com_resultado_de_todos_os_meses = json.load(arq)
 
     lista_de_porcentagens = []
+    lista_do_total_economizado = []
 
     for i, j, k in lista_com_resultado_de_todos_os_meses:
         lista_de_porcentagens.append([i, comparar_mes_com_a_meta(j,k)])
-        lista_do_total_economizado = [i, verificar_total_economizado(j,k)]
-        
-        porcentagens_dos_meses_com_a_meta.append(lista_de_porcentagens)
-        total_economizado_em_cada_mes.append(lista_do_total_economizado)
-
+        lista_do_total_economizado.append([i, verificar_total_economizado(j,k)])
+    
+    porcentagens_dos_meses_com_a_meta = lista_de_porcentagens
+    total_economizado_em_cada_mes = lista_do_total_economizado
     mes_que_mais_economizou = verificar_mes_que_mais_economizou(lista_de_porcentagens)
 
     dict_mes = {

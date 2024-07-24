@@ -1,1 +1,1 @@
-{"porcentagens_dos_meses_com_a_meta": [[[7, 0.17670899426519368], [7, 1652949868.4234326]], [[7, 0.17670899426519368], [7, 1652949868.4234326]]], "total_economizado_em_cada_mes": [[7, 683705.3415811667], [7, "Voce nao obteve exito em economizar"]], "mes_que_mais_economizou": 0.17670899426519368}
+{"porcentagens_dos_meses_com_a_meta": [[7, 0.17670899426519368], [7, 1652949868.4234326]], "total_economizado_em_cada_mes": [[7, 683705.3415811667], [7, "Voce nao obteve exito em economizar"]], "mes_que_mais_economizou": 0.17670899426519368}
