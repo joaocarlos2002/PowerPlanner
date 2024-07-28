@@ -159,26 +159,63 @@ def cadastrar_meta(tarifa, meta, data = date.today()):
 
 
 def comparar_mes_com_a_meta(meta, consumido):
-    '''
-    FALTA ARRUMAR O CODIGO E DOCUMENTAR
-    '''
-    porce = (consumido * 100) / meta
-    return (porce)
+    """
+    Compara o valor consumido com a meta e retorna a porcentagem do consumido em relação à meta.
+
+    Parâmetros:
+    meta (float): A meta estabelecida.
+    consumido (float): O valor consumido.
+
+    retorna:
+    float: A porcentagem do valor consumido em relação à meta.
+
+    Levanta:
+    ValueError: Se `meta` ou `consumido` não forem do tipo float.
+    ZeroDivisionError: Se `meta` for zero.
+    """
+
+    if not isinstance(meta, float):
+        raise ValueError('A meta foi informada de forma errada. Deve ser um número do tipo float.')
+    
+    if not isinstance(consumido, float):
+        raise ValueError('O consumido foi informado de forma errada. Deve ser um número do tipo float.')
+
+    if meta == 0:
+        raise ZeroDivisionError('A meta não pode ser zero.')
+
+    try:
+        porcentagem = (consumido * 100) / meta
+        return porcentagem
+    except Exception as e:
+        raise RuntimeError(f'Ocorreu um erro ao calcular a porcentagem: {e}')
+
 
 def verificar_total_economizado(meta, consumido):
-    '''
-    FALTA ARRUMAR O CODIGO E DOCUMENTAR
+    """
+    Calcula o valor economizado com base na meta e no valor consumido.
 
-    '''
+    Parâmetros:
+    meta (float): A meta estabelecida.
+    consumido (float): O valor consumido.
+
+    retorna:
+    float: O valor economizado (meta - consumido).
+
+    levanta:
+    ValueError: Se `meta` ou `consumido` não forem do tipo float.
+    """
+
+    if not isinstance(meta, float):
+        raise ValueError('A meta foi informada de forma errada. Deve ser um número do tipo float.')
+
+    if not isinstance(consumido, float):
+        raise ValueError('O consumido foi informado de forma errada. Deve ser um número do tipo float.')
+
     economizado = meta - consumido
-    
     return economizado
 
-def verificar_mes_que_mais_economizou(lista):
-    '''
-    FALTA ARRUMAR O CODIGO E DOCUMENTAR
 
-    '''
+def verificar_mes_que_mais_economizou(lista):
 
     lista_maior = []
 
@@ -191,9 +228,6 @@ def verificar_mes_que_mais_economizou(lista):
 
 def salva_comparacao_de_meses(porcentagens_dos_meses_com_a_meta = [], total_economizado_em_cada_mes = [], mes_que_mais_economizou = []):
 
-    '''
-    FALTA ARRUMAR O CODIGO E DOCUMENTAR - MUITO MAL ARRUMADO - PRIORIDADE
-    '''
 
     with open(MESES_PATH, 'r') as arq:
         lista_com_resultado_de_todos_os_meses = json.load(arq)
@@ -275,7 +309,5 @@ def cadastrar_consumo (consumo, data = date.today()):
         print(f'Um erro aconteceu no {e}')
         raise
 
-def comparar_mes():
-    ...
 
 # salva_comparacao_de_meses()

@@ -28,9 +28,6 @@ def app():
         
     else: 
         cadastrar_consumo (gerarConsumo()) 
-    
-    # try:
-
 
 if __name__ == '__main__':
     app()

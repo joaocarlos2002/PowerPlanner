@@ -19,10 +19,6 @@ MESES_COMPARADOS = os.path.join('templates', 'comparados.png')
 locale.setlocale(locale.LC_TIME, 'pt_BR.UTF-8')
 
 def gerar_relatorio_diario(consumo):
-    '''
-
-    
-    '''
 
     if not isinstance(consumo, (float)):
         raise ValueError("O consumo diário deve ser float")
@@ -184,21 +180,19 @@ def gerar_relatorio_de_meses_comparados():
         texto = f'Você economizou {total_economizado:.2f} KW'
         pontos = total_economizado * 1000 + 1000
     
-
     try:
-
         draw.text((600,370), f'{calendar.month_name[mes]} você economizou {meses["mes_que_mais_economizou"]:.2f} %', font=ImageFont.truetype(FONTE, 40), fill=(255, 74, 59))
         draw.text((600,500), f'{len(meses["porcentagens_dos_meses_com_a_meta"])} meses cadastrados', font=ImageFont.truetype(FONTE, 40), fill=(255, 74, 59))
         draw.text((600,630), texto, font=ImageFont.truetype(FONTE, 40), fill=(255, 74, 59))
-        draw.text((650,780), pontos, font=ImageFont.truetype(FONTE, 40), fill=(255, 74, 59))
+        draw.text((770,780), pontos, font=ImageFont.truetype(FONTE, 36), fill=(255, 74, 59))
          
          
     except:
-         ...
+         print('Erro ao gerar relatório')
 
 
 
     caminhoParaSalvar =  os.path.join(CAMINHO_RESULTS, f"comparação.png")
     relatorio.save(caminhoParaSalvar, 'PNG')
 
-gerar_relatorio_de_meses_comparados()
+# gerar_relatorio_de_meses_comparados()

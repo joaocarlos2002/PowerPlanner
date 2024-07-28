@@ -12,3 +12,7 @@ def imprimirTextoInicial():
 '''
 
     return texto
+
+
+def imprimirTextoA():
+    return 'Você está no dia do mês que deve ser cadastrado o consumo e a meta'
