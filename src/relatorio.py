@@ -78,11 +78,6 @@ def gerarRelatorioDiario(consumo):
             raise 
 
         caminhoParaSalvar =  os.path.join(CAMINHO_RESULTS, f"Relatorio-{metas_['data']}.png")
-
-        if not os.path.exists(caminhoParaSalvar):
-            raise FileNotFoundError(f'O arquivo {caminhoParaSalvar} não foi encontrado')
-
-
         relatorio.save(caminhoParaSalvar, 'PNG')
     
     except FileNotFoundError as arquivo_nao_encontrado:
@@ -101,15 +96,15 @@ def gerarRelatorioDiario(consumo):
         print(f' Um erro aconteceu {e}')
         raise
 
-def gerarRelatorioMensal(consumido, mes = date.today().month):
+def gerarRelatorioMensal(consumido: float = 0, mes = date.today().month):
     '''
     
     '''
-    
-    if not isinstance(consumido, (float)):
-        raise ValueError("O consumido deve ser float")
     
     try:
+        if not isinstance(consumido, float):
+            raise ValueError("O consumido deve ser float")
+
         relatorio = Image.open(IMAGEM_MENSAL)
         draw = ImageDraw.Draw(relatorio)
         
@@ -129,6 +124,7 @@ def gerarRelatorioMensal(consumido, mes = date.today().month):
 
         if not isinstance(custoTotal, float):
                 raise ValueError(f'O valor de custoTotal deve ser um float')
+        
         try:
             draw.text((675,470), f'{meta} KW', font=ImageFont.truetype(FONTE, 40), fill=(255, 74, 59))
             draw.text((675,600), f'{consumido:.2f} KW', font=ImageFont.truetype(FONTE, 40), fill=(255, 74, 59))
@@ -138,11 +134,7 @@ def gerarRelatorioMensal(consumido, mes = date.today().month):
             print(f' Um erro aconteceu {e}')
             raise  
 
-        caminhoParaSalvar =  os.path.join(CAMINHO_RESULTS, f"Relatorio-{mes}.png")
-
-        if not os.path.exists(caminhoParaSalvar):
-                raise FileNotFoundError(f'O arquivo {caminhoParaSalvar} não foi encontrado')
-    
+        caminhoParaSalvar =  os.path.join(CAMINHO_RESULTS, f"Relatorio-do_mês_{mes}.png")
         relatorio.save(caminhoParaSalvar, 'PNG')
 
     except FileNotFoundError as arquivo_nao_encontrado:

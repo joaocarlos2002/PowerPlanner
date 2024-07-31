@@ -170,7 +170,7 @@ def cadastrarConsumo(consumo, data = date.today()):
         if data.day != monthrange(data.year, data.month)[1]:
             gerarRelatorioDiario(consumo)
         else:
-            gerarRelatorioMensal(enviarDadosMensais)
+            gerarRelatorioMensal(enviarDadosMensais())
     
     except Exception as e:
         print(f'Um erro aconteceu no {e}')

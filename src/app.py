@@ -13,8 +13,9 @@ META_PATH = os.path.join('dados', 'meta.json')
 def app():
     print(imprimirTextoInicial())
     
-    
     data = date.today()
+
+
 
     with open(META_PATH, 'r') as metas:
         metas_ = json.load(metas)
