@@ -2,7 +2,7 @@
 from relatorio import gerar_relatorio_mensal, gerar_relatorio_diario
 from calendar import monthrange
 from datetime import date
-from gerarResultados import *
+# from gerarResultados import *
 import os
 import json
 

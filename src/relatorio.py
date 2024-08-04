@@ -77,7 +77,9 @@ def gerar_relatorio_diario(consumo):
             print(f' Um erro aconteceu {e}')
             raise 
 
-        caminhoParaSalvar =  os.path.join(CAMINHO_RESULTS, f"Relatorio-{metas_['data']}.png")
+        data = date.today()
+        
+        caminhoParaSalvar =  os.path.join(CAMINHO_RESULTS, f"Relatorio-{data}.png")
         relatorio.save(caminhoParaSalvar, 'PNG')
     
     except FileNotFoundError as arquivo_nao_encontrado:
